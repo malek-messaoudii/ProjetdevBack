@@ -4,7 +4,7 @@ const User = require('./user');
 const clientSchema = new mongoose.Schema({
     // Ajoutez des attributs spécifiques aux administrateurs
     nom: { type: String, required: true },
-    prénom: { type: String, required: true },
+    prenom: { type: String, required: true },
     cin: { type: Number, required: true },
     ville: { type: String, required: true },
 

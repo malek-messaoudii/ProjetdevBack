@@ -13,7 +13,6 @@ router.post('/users/:userId/assign-role', adminController.assignRole);
 // GET: Obtenir un utilisateur by id
 router.get('/getbyid/:id',adminController.getUserById);
 
-// GET: Obtenir un utilisateur by email 
-router.get('/getbyemail',adminController.getUserByEmail);
+
 
 module.exports = router;

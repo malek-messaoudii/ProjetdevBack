@@ -2,7 +2,7 @@ const mongoose = require ('mongoose')
 
 const Boutique = mongoose.model('Boutiques',{
 
-    idb:{type:Number,required: true},
+    idb:{type:String,required: true},
     nom:{type:String},
     categorie: { type: String, required: true },
     produits: [{

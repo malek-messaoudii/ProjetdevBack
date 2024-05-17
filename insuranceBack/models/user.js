@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const  User = mongoose.model('users', {
     
-    numérotel :{
+    numerotel :{
         type :String
     },
     email : {

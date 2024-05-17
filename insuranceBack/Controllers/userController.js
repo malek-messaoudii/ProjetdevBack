@@ -8,12 +8,13 @@ const Agent = require('../models/agent');
 exports.Register1 = async (req, res) => {
     try {
         const data = req.body;
+        
         const client = new Client({
             nom: data.nom,
-            prénom: data.prénom,
+            prenom: data.prenom,
             cin: data.cin,
             ville: data.ville,
-            numérotel: data.numérotel,
+            numerotel: data.numerotel,
             email: data.email,
             role: 'client', 
         });
@@ -70,10 +71,10 @@ exports.Register2 = async (req, res) => {
 
 exports.checkUnique = async (req, res) => {
     try {
-        const { email, numérotel, cin } = req.body;
+        const { email, numerotel, cin } = req.body;
 
         const emailExists = await Client.findOne({ email });
-        const numerotelExists = await Client.findOne({ numérotel }); 
+        const numerotelExists = await Client.findOne({ numerotel }); 
         const cinExists = await Client.findOne({ cin });
 
         if (emailExists || numerotelExists || cinExists) {
@@ -89,10 +90,10 @@ exports.checkUnique = async (req, res) => {
 
 exports.checkUnique2 = async (req, res) => {
     try {
-        const { id, email, numérotel} = req.body;
+        const { id, email, numerotel} = req.body;
 
         const emailExists = await Agent.findOne({ email });
-        const numerotelExists = await Agent.findOne({ numérotel }); 
+        const numerotelExists = await Agent.findOne({ numerotel }); 
         const idExists = await Agent.findOne({ id });
 
         if (emailExists || numerotelExists || idExists) {
@@ -227,23 +228,16 @@ exports.deleteUserAccount = async (req, res) => {
 
 
   exports.getUserByEmail = async (req, res) => {
-    const { email } = req.params;
-  
-    if (!email) {
-      return res.status(400).json({ message: 'Email is required' });
-    }
-  
-    const userEmail = email.toLowerCase();
-  
+    const  uemail  = req.params.email;
     try {
-      const user = await User.findOne({ email: userEmail });
+      const user = await User.findOne({ email: uemail });
   
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
 
       // Assuming user.role holds the role information
-      return res.status(200).json({ user, role: user.role });
+      return res.status(200).send(user);
     } catch (error) {
       // Consider using a logging library or a centralized error handling system
       console.error('Error fetching user by email:', error);

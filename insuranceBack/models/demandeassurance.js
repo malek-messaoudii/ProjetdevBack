@@ -1,19 +1,18 @@
 const mongoose = require ('mongoose')
 
 const Demandeassurance = mongoose.model('DemandeAssurance',{
-    iddass:{type:String},
-    typecontrat:{type:String,required:true},
+    nomagenceassurance:{type:String,required:true,ref: 'AssuranceCompany'},
+    typecontrat:{type:String,required:true,ref: 'Contrat'},
     prix:{type:Number},
-    etat:{ type: Boolean },
+    etattraitement:{ type: Boolean ,default :false },
+    volprotection:{ type: Boolean ,default :false },
     nom:{type:String,required:true},
     prenom: {type:String,required:true},
-    numérotel: {type:Number,required:true},
-    email: {type:String,required:true},
+    numerotel: {type:String,required:true},
+    email: {type:String,required:true,ref: 'Client'},
     datedebut:{type:Date,required:true},
     datefin:{type:Date,required:true},
-    idclient: { type: mongoose.Schema.Types.ObjectId, ref: 'Client'},
-    idcontrat: { type: String, ref: 'Contrat'},
-    idproduit: { type: String, ref: 'Produit'}
+    numserieproduit: {type:String,required:true, unique: true },
 
 })
 

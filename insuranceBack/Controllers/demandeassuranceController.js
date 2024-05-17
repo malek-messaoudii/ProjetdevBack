@@ -3,27 +3,23 @@ const express=require('express');
 const router=express.Router();
 const DemandeAssurance =require ('../models/demandeassurance');
 const Contrat =require ('../models/contrat');
-const Produit =require ('../models/produit');
+const AssuranceCompany=require('../models/assurancecompany');
 const Client =require ('../models/client');
 
 exports.addDemandeAssurance = async (req, res) => {
   try {
-      const data = req.params;
-      console.log(data);
+      const data = req.body;
+     
       // Vérification des clés étrangères
-      const clientExists = await Client.findById(data.idclient);
+      const clientExists = await Client.findOne({email:data.email});
       if (!clientExists) {
           return res.status(400).send("Le client spécifié n'existe pas");
       }
 
-      const contratExists = await Contrat.findOne({ idc: data.idcontrat });
-      if (!contratExists) {
-          return res.status(400).send("Le contrat spécifié n'existe pas");
-      }
-
-      const produitExists = await Produit.findOne({ idp: data.idproduit });
-      if (!produitExists) {
-          return res.status(400).send("Le produit spécifié n'existe pas");
+      const agenceassuranceExists = await AssuranceCompany.findOne({nomagenceassurance: data.nomagenceassurance });
+    
+      if (!agenceassuranceExists) {
+          return res.status(400).send("L'agence d'assurance spécifié n'existe pas");
       }
      
       // Création de la demande d'assurance
@@ -60,7 +56,21 @@ exports.getDemandeAssurancetById=async (req,res)=>{
             res.status(400).send(error)
               }
                
-            }      
+            }     
+            
+            
+ exports.getDemandeAssurancetByEmail=async (req,res)=>{
+              try
+                {  email=req.params.email;
+                  demass= await DemandeAssurance.find({email:email});        //1er champ dans findOne (nom champ qui existe dans bd)2eme champ (recupere du param)
+                   res.status(200).send(demass);
+                 }
+              catch(error)
+                {
+              res.status(400).send(error)
+                }
+                 
+              }           
 exports.deleteDemandeAssurance=async (req,res)=>{
    try
     {  idc=req.params.id;

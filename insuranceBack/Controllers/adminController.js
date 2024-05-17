@@ -10,21 +10,7 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
-exports.getUserByEmail=async(req, res) => {
-    const { email } = req.query; 
-    User.findOne({ email: email }) 
-        .then(user => {
-            if (!user) {
-                res.status(404).send('Utilisateur non trouvé');
-            } else {
-                res.send(user);
-            }
-        })
-        .catch(err => {
-            console.error('Erreur lors de la recherche de l\'utilisateur par e-mail:', err);
-            res.status(500).send('Erreur serveur');
-        });
-}
+
 
 // Attribuer un rôle à un utilisateur (réservé à l'admin)
 exports.assignRole = async (req, res) => {

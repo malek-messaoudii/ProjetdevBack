@@ -9,7 +9,7 @@ const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, callback) => {
             const date = Date.now();
-            req.date = date;  
+            req.date = date;
             const uploadDir = path.join(__dirname, '..', 'uploads', date.toString());
             fs.mkdirSync(uploadDir, { recursive: true });
             callback(null, uploadDir);
@@ -17,14 +17,13 @@ const upload = multer({
         filename: (req, file, callback) => {
             let extension = file.mimetype.split('/')[1];
             let fl = file.fieldname + '.' + extension;
-            const fullFilename = path.join(req.date.toString(), fl);  // Accessing date from req object
+            const fullFilename = path.join(req.date.toString(), fl); // Accessing date from req object
             callback(null, fl);
-            req.filename = fullFilename;  // Store the complete file path in req for later use
+            req.filename = fullFilename; // Store the complete file path in req for later use
         }
     })
 });
-
-router.post('/addproduit', upload.any('file'),produitController.addProduit);
+router.post('/addproduit', upload.single('image'),produitController.addProduit);
 router.get('/allproduits',produitController.getAllProduits);
 router.get('/getproduitbyid/:id',produitController.getProduitById);
 router.delete('/deleteproduit/:id',produitController.deleteProduit);

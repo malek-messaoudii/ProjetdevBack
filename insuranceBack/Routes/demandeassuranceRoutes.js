@@ -6,6 +6,7 @@ const demandeassuranceController =require ('../Controllers/demandeassuranceContr
 router.post('/adddemandeassurance',demandeassuranceController.addDemandeAssurance);
 router.get('/alldemandeassurance',demandeassuranceController.getAllDemandeAssurances);
 router.get('/getdemandeassurancebyid/:id',demandeassuranceController.getDemandeAssurancetById);
+router.get('/getdemandeassurancebyemail/:email',demandeassuranceController.getDemandeAssurancetByEmail);
 router.delete('/deletedemandeassurance/:id',demandeassuranceController.deleteDemandeAssurance);
 router.put('/updatdemandeassurance/:id',demandeassuranceController.updateDemandeAssurance);
 

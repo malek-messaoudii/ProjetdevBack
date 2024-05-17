@@ -1,6 +1,7 @@
 const express =require("express");
 require ('./config/connect');
 const cors = require("cors");
+const path = require('path');
 const contratRouter =require('./Routes/contratRoutes');
 const adminRouter =require ('./Routes/adminRoutes');
 const userRouter =require ('./Routes/userRoutes');
@@ -22,6 +23,10 @@ app.use(cors({
 
 }));
 app.use(express.json());
+
+
+// Définir un gestionnaire de fichiers statiques pour le répertoire d'images
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(4000,()=>{
     console.log('server work');
