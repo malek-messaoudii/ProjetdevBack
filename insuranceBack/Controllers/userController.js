@@ -42,7 +42,7 @@ exports.Register2 = async (req, res) => {
             id: data.id,
             nomg: data.nomg,
             email: data.email,
-            numérotel: data.numérotel,
+            numerotel: data.numerotel,
             role: data.role, 
         });
 
@@ -90,13 +90,13 @@ exports.checkUnique = async (req, res) => {
 
 exports.checkUnique2 = async (req, res) => {
     try {
-        const { id, email, numerotel} = req.body;
+        const {  email, numerotel} = req.body;
 
         const emailExists = await Agent.findOne({ email });
         const numerotelExists = await Agent.findOne({ numerotel }); 
-        const idExists = await Agent.findOne({ id });
+      
 
-        if (emailExists || numerotelExists || idExists) {
+        if (emailExists || numerotelExists) {
             res.json({ unique: false });
         } else {
             res.json({ unique: true });

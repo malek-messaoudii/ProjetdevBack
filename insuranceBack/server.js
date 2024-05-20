@@ -9,6 +9,7 @@ const agentboutiqueRouter =require ('./Routes/agentboutiqueRoutes');
 const agentreparationRouter =require ('./Routes/agentreparationRoutes');
 const agentassuranceRouter =require ('./Routes/agentassuranceRoutes');
 const clientRouter =require ('./Routes/clientRoutes');
+const agentRouter =require ('./Routes/agentRoutes');
 const produitRouter=require('./Routes/produitRoutes');
 const boutiqueRouter=require('./Routes/boutiqueRoutes');
 const assurancecompanyRouter=require('./Routes/assurancecompanyRoutes');
@@ -70,6 +71,7 @@ app.post("/authenticate", async (req, res) => {
  app.use('/reparationcompany',reparationcompanyRouter);
  app.use('/demandeassurance',demandeassuranceRouter);
  app.use('/claim', claimRouter);
+ app.use('/agent',agentRouter)
 
 
 

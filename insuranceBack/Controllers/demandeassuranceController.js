@@ -70,7 +70,20 @@ exports.getDemandeAssurancetById=async (req,res)=>{
               res.status(400).send(error)
                 }
                  
-              }           
+              }      
+ exports.getDemandeAssurancetByAgenceName=async (req,res)=>{
+      try
+         {  nom=req.params.nom;
+            demass= await DemandeAssurance.find({nomagenceassurance:nom,etattraitement:'En Attente De Validation'});        //1er champ dans findOne (nom champ qui existe dans bd)2eme champ (recupere du param)
+            console.log(`Found demandes: ${JSON.stringify(demass)}`);
+            res.status(200).send(demass);
+         }
+                catch(error)
+                  {
+                res.status(400).send(error)
+                  }
+                   
+                }                   
 exports.deleteDemandeAssurance=async (req,res)=>{
    try
     {  idc=req.params.id;
@@ -84,19 +97,37 @@ exports.deleteDemandeAssurance=async (req,res)=>{
                    
                 } 
                 
-exports.updateDemandeAssurance=async (req,res)=>{
+exports.updateDemandeAssurancevalid=async (req,res)=>{
     try
-     {  idc=req.params.id;
-         newData=req.body;
-         updateddemandassurance= await DemandeAssurance.findOneAndUpdate({iddass:idc},newData)  ;      //1er champ dans findOne (nom champ qui existe dans bd)2eme champ (recupere du param)
+     {  const idc = req.params.id;
+      const newData = { etattraitement: 'Validé' }; // Only update the 'etat' field to true
+      const updateddemandassurance = await DemandeAssurance.findOneAndUpdate(
+        { _id: idc }, // Assuming _id is the primary key field
+        newData,
+        { new: true } // Return the updated document
+      );
         res.status(200).send(updateddemandassurance);
      }
     catch(error)
     {
     res.status(400).send(error);
     }
-                                      
-                       } 
+  };
+
+    exports.updateDemandeAssurancerefus = async (req, res) => {
+      try {
+        const idc = req.params.id;
+        const newData = { etattraitement: 'Refusé' }; // Update the 'etattraitement' field to 'Refusé'
+        const updateddemandassurance2 = await DemandeAssurance.findOneAndUpdate(
+          { _id: idc }, // Assuming _id is the primary key field
+          newData,
+          { new: true } // Return the updated document
+        );
+        res.status(200).send(updateddemandassurance2);
+      } catch (error) {
+        res.status(400).send(error);
+      }
+    };
 
 
 

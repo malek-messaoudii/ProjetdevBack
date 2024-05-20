@@ -7,9 +7,10 @@ router.post('/adddemandeassurance',demandeassuranceController.addDemandeAssuranc
 router.get('/alldemandeassurance',demandeassuranceController.getAllDemandeAssurances);
 router.get('/getdemandeassurancebyid/:id',demandeassuranceController.getDemandeAssurancetById);
 router.get('/getdemandeassurancebyemail/:email',demandeassuranceController.getDemandeAssurancetByEmail);
+router.get('/getDemandeAssurancetByAgenceName/:nom',demandeassuranceController.getDemandeAssurancetByAgenceName);
 router.delete('/deletedemandeassurance/:id',demandeassuranceController.deleteDemandeAssurance);
-router.put('/updatdemandeassurance/:id',demandeassuranceController.updateDemandeAssurance);
-
+router.put('/updatdemandeassurancevalid/:id',demandeassuranceController.updateDemandeAssurancevalid);
+router.put('/updateDemandeAssurancerefus/:id', demandeassuranceController.updateDemandeAssurancerefus);
 
 
 
